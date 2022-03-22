@@ -1,0 +1,40 @@
+
+# database init, supports mysql too
+database: h2
+spring:
+  datasource:
+    schema: classpath*:db/${database}/schema.sql
+    data: classpath*:db/${database}/data.sql
+  thymeleaf:
+    mode: HTML
+  jpa:
+    show-sql: false
+    open-in-view: true
+    properties:
+      hibernate:
+        show_sql: false
+        ddl-auto: create-drop
+
+  # Internationalization
+  messages:
+    basename: messages/messages
+
+  # Maximum time static resources should be cached
+  resources:
+    cache:
+      cachecontrol:
+        max-age: 12h
+
+  # Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+  # Logging
+logging:
+  level:
+    org:
+      springframework:
+        web: INFO
